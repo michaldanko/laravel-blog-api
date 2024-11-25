@@ -19,5 +19,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        // Create authors
+        \App\Models\Author::factory(10)->create();
     }
 }
