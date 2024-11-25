@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Author;
 use App\Models\Category;
+use App\Models\Post;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -27,5 +28,12 @@ class DatabaseSeeder extends Seeder
 
         // Create categories
         Category::factory(10)->create();
+
+        // Create posts
+        Post::factory(100)->create()->each(function ($post) {
+            $categories = Category::inRandomOrder()->take(rand(1, 3))->pluck('id');
+
+            $post->categories()->attach($categories);
+        });
     }
 }
