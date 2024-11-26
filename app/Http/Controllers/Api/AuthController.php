@@ -12,6 +12,28 @@ class AuthController extends Controller
 {
     /**
      * Generate token.
+     *
+     * @OA\Post(
+     *     path="/api/auth/token",
+     *     tags={"Authentication"},
+     *     summary="Generate token",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"email", "password"},
+     *             @OA\Property(property="email", type="string", example="test@example.com"),
+     *             @OA\Property(property="password", type="string", example="password")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Token generated",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="token", type="string", example="your_generated_token")
+     *         )
+     *     ),
+     *     @OA\Response(response=400, description="Invalid credentials")
+     * )
      */
     public function generateToken(Request $request)
     {
@@ -35,6 +57,20 @@ class AuthController extends Controller
 
     /**
      * User logout and token revocation
+     *
+     * @OA\Post(
+     *     path="/api/auth/logout",
+     *     tags={"Authentication"},
+     *     summary="Logout user and revoke token",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successfully logged out",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="You have been successfully logged out.")
+     *         )
+     *     ),
+     *     @OA\Response(response=401, description="Unauthorized")
+     * )
      */
     public function logout(Request $request)
     {
