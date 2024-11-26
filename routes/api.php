@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/auth/token', [AuthController::class, 'generateToken']);
 
 // Protected routes
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['auth:sanctum', 'throttle:api'])->group(function () {
     Route::apiResource('posts', PostController::class);
 
     Route::post('/auth/logout', [AuthController::class, 'logout']);
