@@ -10,5 +10,7 @@ Route::post('/auth/token', [AuthController::class, 'generateToken']);
 
 // Protected routes
 Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('posts', PostController::class);
+
     Route::post('/auth/logout', [AuthController::class, 'logout']);
 });
